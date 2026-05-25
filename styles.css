@@ -213,35 +213,38 @@ textarea{
 ========================= */
 
 .summary-strip{
-  display:grid;
-  grid-template-columns:repeat(3, minmax(0,1fr));
-  gap:10px;
-  margin:8px 0 16px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:0;
+  margin:16px 0 28px;
 }
 
 .summary-box{
-  border:2px solid var(--line);
-  background:var(--panel);
-  min-height:84px;
-  padding:12px 10px;
+  flex:1 1 80px;
+  border:none;
+  background:transparent;
+  min-height:unset;
+  padding:0 28px 0 0;
   display:flex;
   flex-direction:column;
-  justify-content:space-between;
+  gap:3px;
 }
 
 .summary-box__label{
-  font-size:.7rem;
+  font-size:.62rem;
   font-weight:800;
   text-transform:uppercase;
-  color:var(--text-soft);
-  letter-spacing:.04em;
+  color:var(--text-faint);
+  letter-spacing:.07em;
+  order:2;
 }
 
 .summary-box__value{
-  font-size:1.6rem;
+  font-size:2.8rem;
   font-weight:900;
   color:var(--text);
   line-height:1;
+  order:1;
 }
 
 /* =========================
@@ -249,10 +252,10 @@ textarea{
 ========================= */
 
 .progress-panel{
-  border:2px solid var(--line);
-  background:var(--panel);
-  padding:12px 12px 14px;
-  margin-bottom:16px;
+  border:none;
+  background:transparent;
+  padding:0 0 28px;
+  margin-bottom:0;
 }
 
 .progress-panel__head{
@@ -260,26 +263,28 @@ textarea{
   align-items:center;
   justify-content:space-between;
   gap:12px;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
 .progress-panel__title{
-  font-size:.8rem;
+  font-size:.62rem;
   font-weight:900;
   text-transform:uppercase;
-  color:var(--text);
+  color:var(--text-faint);
+  letter-spacing:.07em;
 }
 
 .progress-panel__pct{
-  font-size:.9rem;
+  font-size:.62rem;
   font-weight:900;
-  color:var(--text);
+  color:var(--text-faint);
+  letter-spacing:.04em;
 }
 
 .mono-progress{
   position:relative;
-  height:18px;
-  border:2px solid var(--line);
+  height:3px;
+  border:none;
   background:var(--panel-2);
   overflow:hidden;
 }
@@ -297,10 +302,11 @@ textarea{
 ========================= */
 
 .focus-card{
-  border:2px solid var(--line);
-  background:var(--panel);
-  padding:14px;
-  margin-bottom:16px;
+  border:none;
+  background:transparent;
+  padding:20px 0 32px;
+  margin-bottom:0;
+  border-bottom:1px solid var(--line);
 }
 
 .focus-card__topline{
@@ -320,13 +326,13 @@ textarea{
 }
 
 .focus-card__title{
-  font-size:1.6rem;
-  line-height:1.05;
+  font-size:2.8rem;
+  line-height:1.0;
   font-weight:900;
   color:var(--text);
   text-transform:uppercase;
   word-break:break-word;
-  margin-bottom:10px;
+  margin-bottom:20px;
 }
 
 .focus-card__meta{
@@ -421,6 +427,7 @@ textarea{
 ========================= */
 
 .list-section{
+  margin-top:28px;
   margin-bottom:20px;
 }
 
@@ -450,10 +457,16 @@ textarea{
   gap:12px;
 }
 
+#taskList,
+#belowTasks{
+  gap:0;
+}
+
 .task-card{
-  border:2px solid var(--line);
-  background:var(--panel);
-  padding:14px 14px;
+  border:none;
+  border-bottom:1px solid var(--line);
+  background:transparent;
+  padding:16px 0;
   display:grid;
   grid-template-columns:minmax(0,1fr) auto;
   gap:12px;
@@ -491,12 +504,12 @@ textarea{
 }
 
 .task-icon-btn{
-  width:42px;
-  height:42px;
-  border:2px solid var(--line);
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
   display:grid;
   place-items:center;
-  background:var(--panel);
+  background:transparent;
   font-size:1rem;
   font-weight:900;
 }
@@ -504,6 +517,7 @@ textarea{
 .task-icon-btn--filled{
   background:var(--black);
   color:var(--accent-invert);
+  border-color:var(--black);
 }
 
 /* =========================
@@ -956,7 +970,11 @@ body.theme--noirblanc .screen-title{
   }
 
   .focus-card__title{
-    font-size:1.35rem;
+    font-size:2.2rem;
+  }
+
+  .summary-box__value{
+    font-size:2.2rem;
   }
 
   .action-square{
@@ -1134,4 +1152,148 @@ select[multiple] option{
 }
 #celebrateShell #celebrateTitle{
   text-transform:uppercase;
+}
+
+/* =========================
+   DESKTOP LAYOUT (≥ 900px)
+========================= */
+
+@media (min-width: 900px){
+
+  /* Sidebar : le bottom-nav devient un rail gauche fixe */
+  .app{
+    padding-left:220px;
+  }
+
+  .bottom-nav{
+    inset:0 auto 0 0;
+    width:220px;
+    height:100%;
+    right:auto;
+    bottom:auto;
+    border-top:none;
+    border-right:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    padding:44px 0 28px;
+  }
+
+  /* Branding en haut du rail */
+  .bottom-nav::before{
+    content:"ELIMINATOR";
+    display:block;
+    padding:0 24px 44px;
+    font-size:.68rem;
+    font-weight:900;
+    letter-spacing:.18em;
+    color:var(--text-faint);
+    text-transform:uppercase;
+  }
+
+  .bottom-nav__item{
+    height:52px;
+    justify-content:flex-start;
+    padding:0 24px;
+    position:relative;
+  }
+
+  .bottom-nav__item.is-active{
+    background:transparent;
+    color:var(--text);
+  }
+
+  .bottom-nav__item.is-active::after{
+    content:"";
+    position:absolute;
+    left:0;
+    top:16px;
+    bottom:16px;
+    width:2px;
+    background:var(--black);
+  }
+
+  .bottom-nav__label{
+    font-size:.8rem;
+    letter-spacing:.05em;
+  }
+
+  /* Header : reste dans le flux, profite du padding-left de .app */
+  .app-header{
+    padding:0 48px 0 0;
+  }
+
+  .top-tabs{
+    padding:0 48px 8px 0;
+    gap:28px;
+  }
+
+  /* Contenu : pleine largeur, sans centrage */
+  .screen-wrap{
+    width:100%;
+    max-width:none;
+    margin:0;
+    padding:16px 56px 48px;
+  }
+
+  /* Écran TÂCHES : deux colonnes */
+  #screen-tasks{
+    display:grid;
+    grid-template-columns:1fr 340px;
+    grid-template-areas:
+      "summary  summary"
+      "progress progress"
+      "focus    list";
+    column-gap:72px;
+    align-items:start;
+  }
+
+  #screen-tasks > .summary-strip{
+    grid-area:summary;
+  }
+
+  #screen-tasks > .progress-panel{
+    grid-area:progress;
+  }
+
+  #screen-tasks > .focus-card{
+    grid-area:focus;
+    position:sticky;
+    top:calc(var(--header-h) + 64px);
+    align-self:start;
+    border-bottom:none;
+    padding-bottom:0;
+  }
+
+  #screen-tasks > #taskListSection{
+    grid-area:list;
+  }
+
+  /* Titre de tâche : dominant sur desktop */
+  .focus-card__title{
+    font-size:5rem;
+    line-height:.94;
+    margin-bottom:36px;
+    letter-spacing:-.01em;
+  }
+
+  /* Chiffres résumé plus grands */
+  .summary-box__value{
+    font-size:4rem;
+  }
+
+  /* Barre de progression un peu plus épaisse */
+  .mono-progress{
+    height:4px;
+  }
+
+  /* Boutons d'action : 4 colonnes */
+  .focus-card__actions{
+    grid-template-columns:repeat(4, minmax(0,1fr));
+  }
+
+  /* Évite le padding-bottom du bottom-nav (inexistant sur desktop) */
+  .screen-page{
+    padding-bottom:0;
+  }
 }
